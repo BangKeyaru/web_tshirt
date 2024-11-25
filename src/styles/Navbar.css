@@ -1,0 +1,62 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  color: white;
+  padding: 10px 20px;
+}
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+.nav-links li {
+  list-style: none;
+  cursor: pointer;
+}
+.profile-icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.profile-icon:hover {
+  color: #e74c3c; /* Efek saat hover */
+}
+
+/* Style umum untuk navbar */
+.navbar {
+  background-color: #333; /* Warna latar belakang navbar */
+  padding: 10px;
+}
+
+/* Style untuk daftar link navbar */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style untuk tiap item dalam navbar */
+.nav-links li {
+  padding: 5px 10px;
+}
+
+/* Style untuk link dalam navbar */
+.nav-links a {
+  color: #bbb; /* Warna teks default */
+  text-decoration: none; /* Menghilangkan garis bawah */
+  font-weight: bold; /* Menebalkan teks */
+}
+
+/* Efek saat link di-hover */
+.nav-links a:hover {
+  color: white; /* Mengubah warna teks menjadi putih saat hover */
+}
+
+/* Style untuk link yang aktif */
+.nav-links a.active {
+  color: white; /* Mengubah warna teks menjadi putih saat aktif */
+}

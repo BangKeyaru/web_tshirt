@@ -1,0 +1,6 @@
+.product-list {
+  display: flex;
+  gap: 10px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
