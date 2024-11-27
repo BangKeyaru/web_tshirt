@@ -1,6 +1,6 @@
-import React from "react";
-import ProductCard from "./ProductCard";
-import "../styles/ProductList.css";
+import React, { useState } from "react";
+import ProductCard from "./ProductCard"; // Pastikan path ini benar
+import "../styles/ProductList.css"; // Pastikan path ini benar
 import { useNavigate } from "react-router-dom";
 
 const products = [
@@ -8,32 +8,54 @@ const products = [
     id: 1,
     name: "Kaos Mario",
     price: 90000,
+    originalPrice: 120000,
+    discount: 25,
     stock: 100,
     description: "Kaos dengan tema Mario",
-    image: "/images/kaos-mario.jpg",
+    images: [
+      "/images/kaos-mario.jpg",
+      "/images/kaos-mario-detail1.jpg",
+      "/images/kaos-mario-detail2.jpg",
+    ],
+    isOnSale: true,
   },
   {
     id: 2,
     name: "Kaos Pokemon",
     price: 110000,
+    originalPrice: 140000,
+    discount: 21,
     stock: 90,
     description: "Kaos dengan tema Pokemon",
-    image: "/images/kaos-pokemon.jpg",
+    images: [
+      "/images/kaos-pokemon.jpg",
+      "/images/kaos-pokemon-detail1.jpg",
+      "/images/kaos-pokemon-detail2.jpg",
+    ],
+    isOnSale: true,
   },
   {
     id: 3,
     name: "Kaos Minecraft",
     price: 90000,
+    originalPrice: 100000,
+    discount: 10,
     stock: 40,
     description: "Kaos dengan tema Minecraft",
-    image: "/images/kaos-minecraft.jpg",
+    images: [
+      "/images/kaos-minecraft.jpg",
+      "/images/kaos-minecraft-detail1.jpg",
+      "/images/kaos-minecraft-detail2.jpg",
+    ],
+    isOnSale: true,
   },
 ];
 
 const ProductList = () => {
   const navigate = useNavigate();
+  const [hoveredProduct, setHoveredProduct] = useState(null); // Contoh penggunaan useState di awal komponen
 
-  // Pastikan fungsi handleProductClick didefinisikan
+  // Pastikan semua hook dipanggil di sini, sebelum logika lain atau pengembalian
   const handleProductClick = (product) => {
     navigate(`/product/${product.id}`, { state: product });
   };
@@ -43,13 +65,14 @@ const ProductList = () => {
       {products.map((product) => (
         <div
           key={product.id}
-          className="product-card"
           onClick={() => handleProductClick(product)}
+          onMouseEnter={() => setHoveredProduct(product.id)}
+          onMouseLeave={() => setHoveredProduct(null)}
         >
-          <img src={product.image} alt={product.name} />
-          <h4>{product.name}</h4>
-          <p>Rp. {product.price.toLocaleString()}</p>
-          <p>{product.stock} pcs</p>
+          <ProductCard
+            product={product}
+            isHovered={hoveredProduct === product.id} // Menggunakan state untuk hover
+          />
         </div>
       ))}
     </div>

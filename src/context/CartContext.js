@@ -1,20 +1,22 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-// Context untuk Cart
+// Membuat context untuk keranjang belanja
 const CartContext = createContext();
 
-// Provider untuk CartContext
+// Provider untuk keranjang belanja
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  // Fungsi untuk menambahkan produk ke keranjang
   const addToCart = (product) => {
-    setCartItems((prevItems) => [...prevItems, product]);
+    const newItem = {
+      ...product,
+      image: product.images[0], // Menyimpan gambar pertama sebagai gambar produk
+    };
+    setCartItems((prevItems) => [...prevItems, newItem]);
   };
 
-  // Fungsi untuk menghapus produk dari keranjang
-  const removeFromCart = (id) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
+  const removeFromCart = (productId) => {
+    setCartItems(cartItems.filter((item) => item.id !== productId));
   };
 
   return (

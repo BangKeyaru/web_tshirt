@@ -11,11 +11,16 @@ const SidebarKategori = () => {
   ];
 
   return (
-    <div className="sidebar-categori">
-      <h3>KATEGORI</h3>
-      <ul>
+    <div className="sidebar-categori p-3 bg-primary text-white rounded">
+      <h3 className="mb-3">KATEGORI</h3>
+      <ul className="list-group list-group-flush">
         {categories.map((category, index) => (
-          <li key={index}>{category}</li>
+          <li
+            key={index}
+            className="list-group-item list-group-item-action bg-light text-dark my-1 rounded"
+          >
+            {category}
+          </li>
         ))}
       </ul>
     </div>

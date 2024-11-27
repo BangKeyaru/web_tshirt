@@ -1,0 +1,21 @@
+.order-history {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.transaction-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.transaction-item p {
+  margin: 5px 0;
+}
+
+.transaction-item strong {
+  color: #333;
+}
