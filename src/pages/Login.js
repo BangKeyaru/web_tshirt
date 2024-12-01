@@ -1,73 +1,106 @@
 import React, { useState } from "react";
-import { useAuth } from "../context/AuthContext"; // Mengakses context untuk login
+import { useAuth } from "../context/AuthContext"; // Mengakses context untuk autentikasi
 import { useNavigate } from "react-router-dom"; // Untuk navigasi
-import { NavLink } from "react-router-dom"; // Import NavLink
-import "../styles/Login.css"; // Pastikan file CSS login diimpor
+import { NavLink } from "react-router-dom"; // Untuk link navigasi
+import "../styles/Login.css"; // Pastikan file CSS diimpor
 
 const Login = () => {
   const { login } = useAuth(); // Mengakses fungsi login dari context
   const navigate = useNavigate(); // Untuk navigasi ke halaman lain setelah login
 
-  // State untuk menangani input form
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // State untuk error message
+  // State untuk input form dan error handling
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState(null); // State untuk error message
+  const [isLoading, setIsLoading] = useState(false); // State untuk menampilkan loader
 
-  // Fungsi untuk menangani submit form
-  const handleLogin = (e) => {
-    e.preventDefault(); // Mencegah reload halaman saat submit form
+  // Fungsi untuk menangani perubahan input
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-    // Validasi form
-    if (!email || !password) {
-      setError("Email dan Password harus diisi.");
-      return;
+  // Fungsi untuk validasi input
+  const validateInput = () => {
+    const { email, password } = formData;
+    if (!email.trim() || !password.trim()) {
+      setError("Email dan password harus diisi.");
+      return false;
     }
+    return true;
+  };
 
-    // Panggil fungsi login dan arahkan ke profil jika berhasil login
-    login();
-    navigate("/profile"); // Arahkan ke halaman profil setelah login
+  // Fungsi untuk menangani form submission
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Mencegah reload halaman
+
+    // Validasi input
+    if (!validateInput()) return;
+
+    setError(null); // Reset error state
+    setIsLoading(true); // Tampilkan loader
+
+    // Simulasi autentikasi (ganti dengan logika autentikasi backend)
+    setTimeout(() => {
+      if (formData.email === "admin@gmail.com" && formData.password === "admin123") {
+        login({ email: formData.email, isAdmin: true }); // Login sebagai admin
+        localStorage.setItem("authToken", "adminToken");
+        localStorage.setItem("userRole", "admin");
+        navigate("/admin/dashboard"); // Arahkan ke halaman admin
+      } else if (formData.email === "user@gmail.com" && formData.password === "user123") {
+        login({ email: formData.email, isAdmin: false }); // Login sebagai user biasa
+        localStorage.setItem("authToken", "userToken");
+        localStorage.setItem("userRole", "user");
+        navigate("/"); // Arahkan ke halaman profil
+      } else {
+        setError("Email atau password salah."); // Tampilkan pesan error jika login gagal
+      }
+      setIsLoading(false); // Sembunyikan loader
+    }, 1000); // Simulasi proses login selama 1 detik
   };
 
   return (
     <div className="login-container fade-in">
-      {" "}
-      {/* Tambahkan kelas fade-in */}
-      <h2>Login</h2>
+      <h2 className="login-title">Login</h2>
       <form onSubmit={handleLogin} className="login-form">
-        {/* Email input */}
+        {/* Input email */}
         <div className="input-group">
           <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
             placeholder="Masukkan email Anda"
             required
+            className={error ? "input-error" : ""}
           />
         </div>
 
-        {/* Password input */}
+        {/* Input password */}
         <div className="input-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
             placeholder="Masukkan password Anda"
             required
+            className={error ? "input-error" : ""}
           />
         </div>
 
-        {/* Error message */}
-        {error && <p className="error">{error}</p>}
+        {/* Tampilkan error jika ada */}
+        {error && <p className="error-message">{error}</p>}
 
-        {/* Login button */}
-        <button type="submit" className="login-button">
-          Login
+        {/* Tombol login */}
+        <button type="submit" className="login-button" disabled={isLoading}>
+          {isLoading ? <span className="loader"></span> : "Login"}
         </button>
       </form>
+
       {/* Link untuk registrasi */}
       <div className="register-link">
         <p>

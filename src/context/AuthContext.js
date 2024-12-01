@@ -5,13 +5,27 @@ const AuthContext = createContext();
 
 // AuthProvider yang menyediakan data autentikasi
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [authState, setAuthState] = useState({
+    isLoggedIn: !!localStorage.getItem("authToken"),
+    user: JSON.parse(localStorage.getItem("userData")) || null,
+  });
 
-  const login = () => setIsLoggedIn(true);
-  const logout = () => setIsLoggedIn(false);
+  // Fungsi login yang menerima detail pengguna
+  const login = (user) => {
+    setAuthState({ isLoggedIn: true, user });
+    localStorage.setItem("authToken", "authToken");
+    localStorage.setItem("userData", JSON.stringify(user));
+  };
+
+  // Fungsi logout untuk menghapus status login
+  const logout = () => {
+    setAuthState({ isLoggedIn: false, user: null });
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userData");
+  };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ ...authState, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

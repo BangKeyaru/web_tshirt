@@ -1,0 +1,33 @@
+/* Kontainer utama dashboard */
+.dashboard-container {
+    display: flex;
+    height: 100vh;  /* Membuat tampilan full screen */
+    }
+    
+  /* Kontainer untuk konten utama dashboard */
+    .dashboard-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f4f4f9; /* Warna latar belakang konten */
+    }
+    
+  /* Styling untuk card-container */
+    .card-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    flex-wrap: wrap;  /* Agar card bisa menyesuaikan ukuran layar */
+    }
+    
+  /* Responsif untuk tampilan lebih kecil */
+    @media (max-width: 768px) {
+    .card-container {
+      flex-direction: column; /* Menyusun card secara vertikal pada layar kecil */
+      align-items: center; /* Menyusun card di tengah */
+    }
+    .card-container .card {
+      margin-bottom: 15px; /* Memberikan jarak antara card pada tampilan mobile */
+      width: 90%; /* Lebar card lebih kecil di mobile */
+    }
+    }
+    
