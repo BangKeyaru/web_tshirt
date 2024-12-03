@@ -16,6 +16,7 @@ import ProductDetail from "./pages/ProductDetail";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./context/ProtectedRoute"; // Pastikan path ini sesuai dengan struktur project Anda
 import { useAuth } from "./context/AuthContext"; // Tambahkan impor ini
+import TambahProduk from "./pages/TambahProduk";
 
 const App = () => {
   const { isLoggedIn, user } = useAuth(); // Gunakan `useAuth` untuk mendapatkan status login dan pengguna
@@ -27,7 +28,6 @@ const App = () => {
       <CartProvider>
         <OrderProvider>
           <Router>
-            <Navbar />
             <div className="content-wrap">
               <Routes>
                 {/* Public Routes */}
@@ -66,9 +66,16 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
+                <Route
+                  path="/TambahProduk"
+                  element={
+                    <ProtectedRoute isAdminRoute>
+                      <TambahProduk />
+                    </ProtectedRoute>
+                  }
+                />
               </Routes>
             </div>
-            <Footer />
           </Router>
         </OrderProvider>
       </CartProvider>

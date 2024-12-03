@@ -92,3 +92,9 @@
 .success-message {
   animation: bounce 0.5s ease-in-out;
 }
+
+/* Kontainer kosong untuk jarak */
+.spacer {
+  height: 50px; /* Sesuaikan tinggi ruang yang diinginkan */
+  width: 100%; /* Memastikan lebar penuh */
+}

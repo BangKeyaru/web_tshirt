@@ -6,7 +6,7 @@ const Sidebar = () => {
         <h3>Dashboard</h3>
         <ul style={{ listStyle: 'none', padding: 0 }}>
         <li><a href="/">Kategori</a></li>
-        <li><a href="/">Produk</a></li>
+        <li><a href="/TambahProduk">Produk</a></li>
         <li><a href="/">Akun</a></li>
         <li><a href="/">Semua Transaksi</a></li>
         <li><a href="/">Notifikasi</a></li>

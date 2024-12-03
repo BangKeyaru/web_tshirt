@@ -47,3 +47,8 @@ button {
 button:hover {
   background-color: #c0392b;
 }
+
+.spacer {
+  height: 50px; /* Sesuaikan tinggi ruang yang diinginkan */
+  width: 100%; /* Memastikan lebar penuh */
+}

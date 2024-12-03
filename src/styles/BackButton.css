@@ -1,0 +1,22 @@
+/* Tombol yang diturunkan dengan posisi absolut */
+.container {
+    position: relative;  /* Container menjadi referensi posisi tombol */
+}
+
+.back-button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    position: absolute; /* Posisi absolut dalam container */
+    bottom: 30px; /* Menurunkan tombol 30px dari bagian bawah container */
+    right: 20px; /* Menjaga tombol tetap di sisi kanan */
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}

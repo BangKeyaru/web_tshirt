@@ -3,6 +3,8 @@ import { useAuth } from "../context/AuthContext"; // Mengakses context untuk aut
 import { useNavigate } from "react-router-dom"; // Untuk navigasi
 import { NavLink } from "react-router-dom"; // Untuk link navigasi
 import "../styles/Login.css"; // Pastikan file CSS diimpor
+import Navbar from "../components/Navbar"; // Navbar diimpor
+import Footer from "../components/Footer"; // Footer diimpor
 
 const Login = () => {
   const { login } = useAuth(); // Mengakses fungsi login dari context
@@ -59,55 +61,56 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container fade-in">
-      <h2 className="login-title">Login</h2>
-      <form onSubmit={handleLogin} className="login-form">
-        {/* Input email */}
-        <div className="input-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            placeholder="Masukkan email Anda"
-            required
-            className={error ? "input-error" : ""}
-          />
+    <>
+      <Navbar /> {/* Navbar aktif */}
+      <div className="login-container fade-in">
+        <h2 className="login-title">Login</h2>
+        <form onSubmit={handleLogin} className="login-form">
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              placeholder="Masukkan email Anda"
+              required
+              className={error ? "input-error" : ""}
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="Masukkan password Anda"
+              required
+              className={error ? "input-error" : ""}
+            />
+          </div>
+          {error && <p className="error-message">{error}</p>}
+          <button type="submit" className="login-button" disabled={isLoading}>
+            {isLoading ? <span className="loader"></span> : "Login"}
+          </button>
+        </form>
+        <div className="register-link">
+          <p>
+            Belum punya akun? <NavLink to="/register">Daftar di sini</NavLink>
+          </p>
         </div>
-
-        {/* Input password */}
-        <div className="input-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            placeholder="Masukkan password Anda"
-            required
-            className={error ? "input-error" : ""}
-          />
-        </div>
-
-        {/* Tampilkan error jika ada */}
-        {error && <p className="error-message">{error}</p>}
-
-        {/* Tombol login */}
-        <button type="submit" className="login-button" disabled={isLoading}>
-          {isLoading ? <span className="loader"></span> : "Login"}
-        </button>
-      </form>
-
-      {/* Link untuk registrasi */}
-      <div className="register-link">
-        <p>
-          Belum punya akun? <NavLink to="/register">Daftar di sini</NavLink>
-        </p>
+        
       </div>
-    </div>
+      <div className="spacer"></div>
+      <div className="spacer"></div>
+      <div className="spacer"></div>
+      <div className="spacer"></div>
+      <div className="spacer"></div> {/* Spacer untuk memberikan jarak */}
+      <Footer /> {/* Footer tetap di bawah */}
+    </>
   );
 };
 

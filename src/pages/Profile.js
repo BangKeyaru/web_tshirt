@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/profile.css";
+import BackButton from "../components/BackButton";
 
 const Profile = () => {
   // State untuk menyimpan data form
@@ -48,7 +49,6 @@ const Profile = () => {
         <button className="sidebar-button">NOTIFIKASI PESAN</button>
         <button className="sidebar-button">RIWAYAT TRANSAKSI</button>
         <button className="sidebar-button">LOG OUT</button>
-        <button className="back-button">⬅</button>
       </div>
 
       {/* Main Content */}
@@ -139,6 +139,9 @@ const Profile = () => {
             SIMPAN
           </button>
         </form>
+      </div>
+      <div>
+        <BackButton/>
       </div>
     </div>
   );
